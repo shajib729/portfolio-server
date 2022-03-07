@@ -30,7 +30,7 @@ router.post("/post", userAuth, upload.single('image'), async (req, res) => {
     }
 })
 
-router.get("/get", userAuth, async (req, res) => {
+router.get("/get", async (req, res) => {
     try {
         let portfolio = await Portfolio.find().sort({ serial: -1 })
         res.status(200).json({portfolio})
@@ -64,7 +64,6 @@ router.patch("/update/:serial", userAuth, upload.single('image'), async (req, re
         res.status(400).json({error:err.message})
     }
 })
-
 
 router.get("/update_order", userAuth, async (req, res) => {
     try {
