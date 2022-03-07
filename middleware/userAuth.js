@@ -4,7 +4,7 @@ const User = require("../model/UserSchema")
 const userAuth = async (req, res, next) => {
     try {
         // console.log(req.cookies.shajib_jwt);
-        const token = jwt.verify(req.cookies.shajib_jwt, process.env.SECRET_KEY)
+        const token = jwt.verify(req.cookies?.shajib_jwt, process.env.SECRET_KEY)
         if (!token) {
             res.status(401).json({error:"Denied to access! Please Login Again."}).redirect('/')
         } else {
@@ -16,7 +16,7 @@ const userAuth = async (req, res, next) => {
             next()
         }
     } catch (err) {
-        res.status(401).json({error:err.message}).redirect('/')
+        res.status(401).json({error:err.message})
     }
 }
 
