@@ -43,7 +43,8 @@ router.post("/login", async (req, res) => {
                     if (token) {
                         res.cookie("shajib_jwt", token, {
                             expires: new Date(Date.now() + 604800000),
-                            httpOnly:true,
+                            // httpOnly:true,
+                            // secure:false,
                         }).status(200).json({ message: "User Successfully Login" })
                     }
                 } else {
