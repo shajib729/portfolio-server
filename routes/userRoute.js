@@ -26,7 +26,7 @@ router.get("/auth", userAuth, async (req, res) => {
 router.post("/login", async (req, res) => {
 
     let { newEmail, newPassword } = req.body
-
+    
     try {
         if (newEmail && newPassword) {
             const existEmail = await User.findOne({ email: newEmail })
@@ -42,10 +42,9 @@ router.post("/login", async (req, res) => {
                     const token = jwt.sign({ _id: loginUser._id }, process.env.SECRET_KEY, {expiresIn:"7d"})
                     if (token) {
                         res.cookie("shajib_jwt", token, {
-                            expires: new Date(Date.now() + 604800000),
-                            // httpOnly:true,
-                            // secure:false,
-                        }).status(200).json({ message: "User Successfully Login" })
+                            expires: new Date(Date.now() + 25892000000),
+                            httpOnly:true,
+                        }).status(200).json({ message: "User Successfully Login", token })
                     }
                 } else {
                     res.status(400).json({errror:"Wrong Information"})
