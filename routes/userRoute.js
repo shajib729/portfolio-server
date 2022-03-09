@@ -39,12 +39,9 @@ router.post("/login", async (req, res) => {
                 const checkPassword = await bcrypt.compare(newPassword, loginUser.password)
 
                 if (checkPassword) {
-                    const token = jwt.sign({ _id: loginUser._id }, process.env.SECRET_KEY, {expiresIn:"7d"})
-                    if (token) {
-                        res.cookie("shajib_jwt", token, {
-                            expires: new Date(Date.now() + 25892000000),
-                            httpOnly:true,
-                        }).status(200).json({ message: "User Successfully Login", token })
+                    const token = jwt.sign({ _id: loginUser._id }, process.env.SECRET_KEY, {expiresIn:"7d"}) 
+                    if (token) { 
+                        res.status(200).json({ message: "User Successfully Login", token })
                     }
                 } else {
                     res.status(400).json({errror:"Wrong Information"})
@@ -100,14 +97,14 @@ router.patch("/update_cv", userAuth, async (req, res) => {
 })
 
 //TODO: LOGOUT a User
-router.get("/logout", userAuth, (req, res) => {
-    try {
-        res.clearCookie("shajib_jwt")
-        res.status(200).json({message:"Successfully logout"})
-        console.log('Logout');
-    } catch (err) {
-        res.status(400).json({error:err.message})
-    }
-})
+// router.get("/logout", userAuth, (req, res) => {
+//     try {
+//         res.clearCookie("shajib_jwt")
+//         res.status(200).json({message:"Successfully logout"})
+//         console.log('Logout');
+//     } catch (err) {
+//         res.status(400).json({error:err.message})
+//     }
+// })
 
 module.exports=router
