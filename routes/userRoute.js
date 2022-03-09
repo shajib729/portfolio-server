@@ -57,10 +57,20 @@ router.post("/login", async (req, res) => {
 })
 
 //Get users image
-router.get("/get_image", userAuth, async (req, res) => {
+router.get("/get_image", async (req, res) => {
     try {
-        const user=await User.findOne({_id:req.userId})
+        const user=await User.findOne()
         res.status(200).json({message:user.image})
+    } catch (err) {
+        res.status(400).json({error:err.message})
+    }
+})
+
+//Get users image
+router.get("/get_cv", async (req, res) => {
+    try {
+        const user=await User.findOne()
+        res.status(200).json({message:user.cv})
     } catch (err) {
         res.status(400).json({error:err.message})
     }
