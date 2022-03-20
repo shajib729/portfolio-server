@@ -67,10 +67,10 @@ router.get("/get_image", async (req, res) => {
 })
 
 //Get users image
-router.get("/get_cv", async (req, res) => {
+router.get("/get_user_data", async (req, res) => {
     try {
-        const user=await User.findOne()
-        res.status(200).json({message:user.cv})
+        const user = await User.findOne()
+        res.status(200).json({message:{image:user.image, cv:user.cv}})
     } catch (err) {
         res.status(400).json({error:err.message})
     }
